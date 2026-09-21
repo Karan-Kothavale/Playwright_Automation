@@ -207,6 +207,15 @@ Whenever a new TC is requested:
 9. Create `utils/` files only when reusable functionality genuinely requires them.
 10. Connect everything using the existing framework architecture.
 11. Execute and validate the TC.
+12. Only after the TC passes successfully, create a markdown file in `.github/prompts/` using the test case name.
+13. The markdown file must contain the test case name, summary, and the step-by-step prompt/instruction list derived from the passed TC.
+
+Rule:
+
+* Do not create the `.github/prompts/*.md` file while the TC is still failing or unverified.
+* Create it only after a successful execution result.
+* Keep the file name aligned with the TC name, for example `TC01_one-way-flight-booking.md`.
+* The file should include structured prompt content such as title, objective, steps, expected result, and reusable guidance for future execution.
 
 Do not create framework files merely because they might be useful later.
 
