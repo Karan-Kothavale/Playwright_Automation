@@ -1,4 +1,4 @@
-import { Page } from '@playwright/test';
+import { type Page } from '@playwright/test';
 
 export interface PassengerDetails {
     name: string;
@@ -20,16 +20,16 @@ export class BookingPage {
     }
 
     async enterPassengerDetails(passenger: PassengerDetails) {
-        await this.page.getByTestId('flight-passenger-name').fill(passenger.name);
-        await this.page.getByTestId('flight-passenger-email').fill(passenger.email);
-        await this.page.getByTestId('flight-passenger-phone').fill(passenger.phone);
-        await this.page.getByTestId('flight-continue-to-payment').click();
+        await this.page.locator('#flight-passenger-name').fill(passenger.name);
+        await this.page.locator('#flight-passenger-email').fill(passenger.email);
+        await this.page.locator('#flight-passenger-phone').fill(passenger.phone);
+        await this.page.locator('button:has-text("Continue to payment")').click();
     }
 
     async completePayment(payment: PaymentDetails) {
-        await this.page.getByTestId('flight-card-number').fill(payment.cardNumber);
-        await this.page.getByTestId('flight-expiry').fill(payment.expiry);
-        await this.page.getByTestId('flight-cvv').fill(payment.cvv);
-        await this.page.getByTestId('flight-book').click();
+        await this.page.locator('#flight-card-number').fill(payment.cardNumber);
+        await this.page.locator('#flight-expiry').fill(payment.expiry);
+        await this.page.locator('#flight-cvv').fill(payment.cvv);
+        await this.page.locator('button:has-text("Pay & Confirm Booking")').click();
     }
 }

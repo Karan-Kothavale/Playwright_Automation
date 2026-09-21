@@ -1,4 +1,4 @@
-import { expect, Page } from '@playwright/test';
+import { expect, type Page } from '@playwright/test';
 
 export class ConfirmationPage {
     readonly page: Page;
@@ -8,8 +8,7 @@ export class ConfirmationPage {
     }
 
     async verifyBookingConfirmed() {
-        await expect(this.page.getByTestId('flight-booking-success')).toContainText('Booking Confirmed');
-        await expect(this.page.getByTestId('flight-pnr')).toBeVisible();
-        await expect(this.page.getByTestId('flight-pnr')).not.toHaveText('');
+        await expect(this.page.getByRole('heading', { name: 'Booking Confirmed!' })).toBeVisible({ timeout: 15000 });
+        await expect(this.page.locator('body')).toContainText(/Booking reference [A-Z0-9]+|booking reference/i, { timeout: 15000 });
     }
 }

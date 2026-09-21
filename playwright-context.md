@@ -841,7 +841,62 @@ Do not:
 
 ---
 
-## 32. TC EXECUTION RULE
+## 32. TEST EXECUTION AND REGRESSION PROTECTION
+
+Generated or modified code is not considered validated until executed.
+
+After implementing or modifying any TC:
+
+1. Run the new or modified TC.
+2. Analyze any failure and identify the root cause.
+3. Fix the root cause.
+4. Re-run the new or modified TC until it passes.
+5. Identify existing TCs affected by any modified shared code.
+6. Re-run all affected existing TCs.
+7. If any previously passing TC now fails, treat it as a regression.
+8. Investigate and fix the regression instead of weakening the affected TC.
+9. Re-run the new or modified TC and all affected existing TCs.
+10. Confirm that the change has not introduced any known regression.
+11. Run the complete test suite when the change affects shared or framework-wide functionality.
+12. Only consider the implementation complete when the requested functionality passes and existing affected functionality continues to pass.
+
+### Shared Code Regression Rule
+
+Additional regression validation is required when modifying code used by multiple TCs, including:
+
+- Page Objects
+- Page Object methods
+- Locators
+- Fixtures
+- Utilities
+- Authentication helpers
+- API helpers
+- Test-data helpers
+- Configuration
+- Shared setup/teardown
+
+When modifying shared code:
+
+- Preserve existing behavior whenever possible.
+- Prefer additive changes over unnecessary modification of existing methods.
+- Do not modify existing TCs merely to accommodate a new implementation.
+- Do not weaken existing assertions to make tests pass.
+- Do not use retries, arbitrary waits, exception swallowing, or test skipping to hide regressions.
+
+### Regression Definition
+
+A regression occurs when functionality that previously passed starts failing after a subsequent code or framework change.
+
+A new TC passing does not prove that the change is safe.
+
+The required state is:
+
+```text
+New or modified TC = PASS
+        +
+Affected existing TCs = PASS
+        ↓
+Change accepted
 
 Generated code is not considered validated until executed.
 
@@ -858,7 +913,6 @@ After implementing a TC:
 Never claim guaranteed first-run success before execution.
 
 ---
-
 ## 33. MINIMAL-CHANGE RULE
 
 When modifying the framework:
