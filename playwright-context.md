@@ -1147,3 +1147,34 @@ Business Scenario + Test Data + Assertions
 The goal is not merely to make an automated test run.
 
 The goal is to build a **clean, reusable Playwright E2E framework where additional TCs can be added without duplicating selectors, URLs, navigation logic or framework code.**
+
+## 40. PLAYWRIGHT AGENT INTEGRATION
+
+Playwright Planner, Generator, and Healer agents may be used to assist with test planning, implementation, execution, and failure resolution.
+
+This `playwright-context.md` remains the authoritative project architecture and coding standard. All Playwright Agents must follow Sections 1–39.
+
+### Agent Responsibilities
+
+Planner:
+- Explore the actual application and create a test plan from the supplied TC requirements.
+- Do not modify framework code.
+
+Generator:
+- Read and follow this context before generating or modifying code.
+- Use the existing project architecture, Page Objects, fixtures, utilities, test data, and configuration.
+- Apply all Sections 1–39 when implementing the TC.
+- Do not create an alternative framework structure or duplicate existing functionality.
+- Execute generated or modified tests before considering the implementation validated.
+
+Healer:
+- Investigate failures using actual execution evidence.
+- Fix the root cause while preserving Sections 1–39.
+- Do not weaken assertions, add arbitrary waits, skip tests, swallow errors, or hide failures.
+- When shared code is modified, follow the regression protection rules in Section 32.
+
+### Conflict Rule
+
+If an Agent's generated approach conflicts with any rule in Sections 1–39, Sections 1–39 take precedence.
+
+Agent-generated code is subject to the same final quality gate defined in Section 38.
