@@ -13,7 +13,7 @@ test('TC01 - should successfully complete a one-way flight booking', async ({ pa
     await flightSearchPage.open();
     await flightSearchPage.searchOneWayFlight('New York', 'London', '2027-08-01');
     await searchResultsPage.verifyResultsDisplayed();
-    await searchResultsPage.selectFlight('New_GW100');
+    await searchResultsPage.selectFlight('GW100');
     await bookingPage.enterPassengerDetails({
         name: 'Ada Lovelace',
         email: 'ada@example.com',
