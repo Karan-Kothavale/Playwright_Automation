@@ -30,7 +30,7 @@ export default defineConfig({
     trace: 'on-first-retry',
 
     // Keep browser visible during local execution.
-    headless: false,
+    headless: process.env.CI ? true : false,
 
     // Capture screenshot for failed tests.
     screenshot: 'only-on-failure',
