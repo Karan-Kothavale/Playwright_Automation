@@ -53,6 +53,6 @@ jobs:
             -d "{
               \"from\": \"Playwright CI <onboarding@resend.dev>\",
               \"to\": [\"$MAIL_RECEIVER\"],
-              \"subject\": \"Playwright CI - $STATUS\",
+              \"subject\": \"Playwright Automation CI - $STATUS\",
               \"html\": \"<h2>Playwright CI Execution</h2><p><b>Status:</b> $STATUS</p><p><b>Repository:</b> ${{ github.repository }}</p><p><b>Branch:</b> ${{ github.ref_name }}</p><p><b>Run:</b> #${{ github.run_number }}</p><p><b>Commit:</b> ${{ github.sha }}</p><p><a href='${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}'>Open GitHub Actions Run</a></p>\"
             }"
